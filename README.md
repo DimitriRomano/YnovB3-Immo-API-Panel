@@ -10,12 +10,12 @@
 ## CLIENT (Utilisateurs) : 
 
 - Voir toutes annonces
-- Voir un produit
+- Voir une annonce
 - Rechercher par filtres
 - Voir son profil et ses notification
 - Modifier ses informations
 
-- Etre notifier des nouvelles annonces
+- Etre notifié des nouvelles annonces
 - Postuler à une annonce
 
 
