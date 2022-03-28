@@ -1,4 +1,4 @@
-## ADMIN AGENCE : 
+## ADMIN AGENCY : 
 
 - Accepter / Recevoir une offre
 - Créer une annonce
