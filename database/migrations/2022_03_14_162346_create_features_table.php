@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::create('features', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('property_id');
+            $table->string('name');
+            $table->string('type');
+            $table->string('value');
         });
     }
 
