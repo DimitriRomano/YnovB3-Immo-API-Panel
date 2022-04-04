@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('localisations', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('property_id');
             $table->float('latitude');
             $table->float('longitude');
             $table->timestamps();
