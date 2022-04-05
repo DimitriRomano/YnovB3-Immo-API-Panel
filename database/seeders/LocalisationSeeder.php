@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class LocalisationSeeder extends Seeder
 {
@@ -14,6 +15,5 @@ class LocalisationSeeder extends Seeder
      */
     public function run()
     {
-        //
     }
 }

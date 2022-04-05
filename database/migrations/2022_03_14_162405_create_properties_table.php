@@ -18,8 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger('type_id');
             $table->integer('price');
             $table->string('title');
+            $table->string('address');
             $table->string('description');
-            $table->string('photos');
+            $table->string('image');
             $table->integer('surface');
             $table->timestamps();
         });

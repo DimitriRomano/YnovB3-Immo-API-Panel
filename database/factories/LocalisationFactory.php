@@ -17,7 +17,8 @@ class LocalisationFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'latitude' => $this->faker->latitude,
+            'longitude' => $this->faker->longitude,
         ];
     }
 }

@@ -26,10 +26,11 @@ class PropertyFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->sentence($nbWords = 4, $variableNbWords = true),
+            'title' => $this->faker->sentence($nbWords = 4, $variableNbWords = true),
             'description' => $this->faker->paragraph($nbSentences = 3, $variableNbSentences = true),
-            'price' => $this->faker->randomNumber(2, 0, 100). '000',
+            'price' => $this->faker->numberBetween(70, 400). '000',
             'address' => $this->faker->address,
+            'surface' => $this->faker->numberBetween(20, 200),
             'image' => 'https://i.imgur.com/rBVJnRk.png',
             'type_id' => $this->faker->numberBetween(1, 3),
         ];

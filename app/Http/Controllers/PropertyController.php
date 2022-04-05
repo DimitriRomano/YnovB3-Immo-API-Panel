@@ -9,7 +9,7 @@ class PropertyController extends Controller
 {
     function index()
     {
-        return Property::all();
+        return Property::with('type')->with('localisation')->get();
     }
 
     function show($id)
