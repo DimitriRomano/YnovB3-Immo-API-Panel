@@ -13,10 +13,13 @@
 - Voir une annonce
 - Rechercher par filtres
 - Voir son profil et ses notification
+- Ajouter une annonce en favoris
+- Voir ses annonces favorites
 - Modifier ses informations
 
 - Etre notifié des nouvelles annonces
 - Postuler à une annonce
+
 
 
 ## VISITEURS :

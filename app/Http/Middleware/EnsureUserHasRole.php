@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -15,7 +16,7 @@ class EnsureUserHasRole
      * @param Request $request
      * @param Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @param string $role
-     * @return Response|RedirectResponse
+     * @return JsonResponse
      */
     public function handle(Request $request, Closure $next, string $role)
     {
@@ -23,6 +24,6 @@ class EnsureUserHasRole
         if($user->role->name === $role) {
             return $next($request);
         };
-        return response('Unauthorized.', 401);
+        return response() -> json(['message' => 'Unauthorized'], 401);
     }
 }
