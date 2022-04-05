@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Feature;
 use App\Models\Localisation;
 use App\Models\Property;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -38,8 +39,20 @@ class PropertySeeder extends Seeder
             $localisation->longitude = $faker->longitude;
             $localisation->property_id = $property->id;
             $localisation->save();
+
+            $features = ['fibre', 'parking', 'ascensceur', 'balcon', 'terrasse', 'jardin', 'piscine','cheminée'];
+            foreach ($features as $feature) {
+                $nFeatures = new Feature();
+                $nFeatures->name = $feature;
+                $nFeatures->value = $faker->numberBetween(0, 1);
+                $nFeatures->save();
+
+                DB::table('feature_property')->insert([
+                    'property_id' => $property->id,
+                    'feature_id' => $nFeatures->id,
+                ]);
+            }
         }
-        //Property::factory()->count(1)->create();
 
     }
 }
