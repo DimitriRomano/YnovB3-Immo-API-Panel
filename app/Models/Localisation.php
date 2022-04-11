@@ -9,6 +9,8 @@ class Localisation extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['latitude', 'longitude'];
+
     public function properties()
     {
         return $this->belongsTo(Property::class);

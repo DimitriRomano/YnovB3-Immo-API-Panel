@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('localisations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('property_id')->ondelete('cascade');
-            $table->float('latitude');
-            $table->float('longitude');
+            $table->double('latitude');
+            $table->double('longitude');
             $table->timestamps();
         });
     }

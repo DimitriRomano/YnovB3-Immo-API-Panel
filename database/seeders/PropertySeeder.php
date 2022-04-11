@@ -42,9 +42,12 @@ class PropertySeeder extends Seeder
 
             $features = ['fibre', 'parking', 'ascensceur', 'balcon', 'terrasse', 'jardin', 'piscine','cheminée'];
             foreach ($features as $feature) {
-                $nFeatures = new Feature();
-                $nFeatures->name = $feature;
-                $nFeatures->value = $faker->numberBetween(0, 1);
+                $nFeatures = Feature::firstOrCreate(
+                    [
+                        'name' => $feature,
+                        'value' => $faker->numberBetween(0, 1)
+                    ]
+                );
                 $nFeatures->save();
 
                 DB::table('feature_property')->insert([

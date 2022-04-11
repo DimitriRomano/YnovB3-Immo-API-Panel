@@ -27,19 +27,19 @@ Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 // ADMIN
 Route::middleware(['auth:sanctum','role:admin'])->group(function () {
     // Voir toutes les annonces
-    Route::get('/admin/properties', [PropertyController::class, 'index']);
+    Route::get('/admin/properties', [PropertyController::class, 'admin_index']);
 
     // Voir une annonce
     Route::get('/admin/properties/{id}', [PropertyController::class, 'show']);
 
     // Créer une annonce
-    Route::post('/admin/properties', [PropertyController::class, 'store']);
+    Route::post('/admin/properties', [PropertyController::class, 'admin_store']);
 
     // Editer une annonce
-    Route::put('/admin/properties/{id}', [PropertyController::class, 'update']);
+    Route::put('/admin/properties/{id}', [PropertyController::class, 'admin_update']);
 
     // Supprimer une annonce
-    Route::delete('/admin/properties/{id}', [PropertyController::class, 'destroy']);
+    Route::delete('/admin/properties/{id}', [PropertyController::class, 'admin_delete']);
 
     // Accepter une offre
     Route::post('/properties/{id}/accept', [PropertyController::class, 'acceptOffer']);
