@@ -27,7 +27,7 @@ Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 // ADMIN
 Route::middleware(['auth:sanctum','role:admin'])->group(function () {
     // Voir toutes les annonces
-    Route::get('/admin/properties', [PropertyController::class, 'admin_index']);
+    Route::get('/admin/properties', [PropertyController::class, 'index']);
 
     // Voir une annonce
     Route::get('/admin/properties/{id}', [PropertyController::class, 'show']);
@@ -43,8 +43,9 @@ Route::middleware(['auth:sanctum','role:admin'])->group(function () {
 
     // Accepter une offre
     Route::post('/properties/{id}/accept', [PropertyController::class, 'acceptOffer']);
-// Refuser une offre
+
+    // Refuser une offre
     Route::post('/properties/{id}/refuse', [PropertyController::class, 'refuseOffer']);
 });
 
-
+Route::get('/properties', [PropertyController::class, 'index']);
