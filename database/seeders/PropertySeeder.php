@@ -34,6 +34,15 @@ class PropertySeeder extends Seeder
             $property->type_id = $faker->numberBetween(1, 3);
             $property->save();
 
+            $list_images = ['https://i.imgur.com/rBVJnRk.png', 'https://i.imgur.com/MFG251G.jpeg', 'https://i.imgur.com/3gfqoFF.jpeg', 'https://i.imgur.com/Vj9XnPX.jpeg'];
+
+            foreach ($list_images as $image) {
+                $property->images()->create([
+                    'property_id' => $property->id,
+                    'url' => $image
+                ]);
+            }
+
             $localisation = new Localisation();
             $localisation->latitude = $faker->latitude;
             $localisation->longitude = $faker->longitude;

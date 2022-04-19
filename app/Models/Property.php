@@ -19,6 +19,11 @@ class Property extends Model
         return $this->hasOne(Localisation::class);
     }
 
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
+
     public function features()
     {
         return $this->belongsToMany(Feature::class);

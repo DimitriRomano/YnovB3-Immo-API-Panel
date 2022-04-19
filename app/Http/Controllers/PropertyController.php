@@ -26,6 +26,12 @@ class PropertyController extends Controller
         ]);
 
         $property = new Property();
+//        if($request->hasFile('image')) {
+//            $image = $request->file('image');
+//            $imageName = time().'.'.$image->getClientOriginalExtension();
+//            $image->move(public_path('images'), $imageName);
+//            $property->image = $imageName;
+//        }
         $property->price = $request->price;
         $property->title = $request->title;
         $property->description = $request->description;
@@ -60,32 +66,44 @@ class PropertyController extends Controller
             'address' => 'required',
             'image' => 'required',
             'surface' => 'required',
-            'localisation' => 'required'
+            'localisation' => 'required',
+            'features' => 'required'
         ]);
 
         $property = Property::findOrFail($id);
-        $property->price = $request->price;
-        $property->title = $request->title;
-        $property->description = $request->description;
-        $property->address = $request->address;
-        $property->image = $request->image;
-        $property->surface = $request->surface;
-        $property->localisation()->update($request->localisation);
-        $property->type_id = Type::where('name', $request->type['name'])->first()->id;
-        $property->features()->detach();
-        $features = $request->features;
-        foreach ($features as $feature) {
-            $feature = Feature::firstOrCreate(
-                [
-                    'name' => $feature['name'],
-                    'value' => $feature['value']
-                ]
-            );
-            $property->features()->attach($feature);
-        }
-        $property->save();
+        if( $property){
+//        if ($request->hasFile('image')) {
+//            $image = $request->file('image');
+//            $imageName = time().'.'.$image->getClientOriginalExtension();
+//            $image->move(public_path('images'), $imageName);
+//            $property->image = $imageName;
+//        }
+            $property->price = $request->price;
+            $property->title = $request->title;
+            $property->description = $request->description;
+            $property->address = $request->address;
+            $property->image = $request->image;
+            $property->surface = $request->surface;
+            $property->type_id = Type::where('name', $request->type['name'])->first()->id;
+            $property->save();
+            $property->localisation()->update(['latitude' => $request->localisation['latitude'], 'longitude' => $request->localisation['longitude']]);
 
-        return response()->json("Property updated", 200);
+            $features = $request->features;
+            foreach ($features as $feature) {
+                $feature = Feature::firstOrCreate(
+                    [
+                        'name' => $feature['name'],
+                        'value' => $feature['value']
+                    ]
+                );
+                $property->features()->attach($feature);
+            }
+
+            $property->save();
+            return response()->json('Property updated', 200);
+        }else{
+            return response()->json('Property not found', 404);
+        }
     }
 
     function admin_delete(Request $request, $id)
@@ -105,7 +123,7 @@ class PropertyController extends Controller
     // GLOBAL
     function index()
     {
-        return Property::with('type')->get();
+        return Property::with('type')->with('images')->get();
     }
 
     function show($id)
@@ -124,4 +142,6 @@ class PropertyController extends Controller
     }
 
     //USER
+
+
 }
