@@ -121,12 +121,12 @@ class PropertyController extends Controller
     }
 
     // GLOBAL
-    function index()
+    function findAll()
     {
         return Property::with('type')->with('images')->get();
     }
 
-    function show($id)
+    function findOne($id)
     {
         $property = Property::where('id', $id)
             ->with('localisation')
@@ -140,8 +140,5 @@ class PropertyController extends Controller
             return response()->json("Property not found", 404);
         }
     }
-
-    //USER
-
 
 }

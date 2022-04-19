@@ -27,10 +27,10 @@ Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 // ADMIN
 Route::middleware(['auth:sanctum','role:admin'])->group(function () {
     // Voir toutes les annonces
-    Route::get('/admin/properties', [PropertyController::class, 'index']);
+    Route::get('/admin/properties', [PropertyController::class, 'findAll']);
 
     // Voir une annonce
-    Route::get('/admin/properties/{id}', [PropertyController::class, 'show']);
+    Route::get('/admin/properties/{id}', [PropertyController::class, 'findOne']);
 
     // Créer une annonce
     Route::post('/admin/properties', [PropertyController::class, 'admin_store']);
@@ -48,4 +48,11 @@ Route::middleware(['auth:sanctum','role:admin'])->group(function () {
     Route::post('/properties/{id}/refuse', [PropertyController::class, 'refuseOffer']);
 });
 
-Route::get('/properties', [PropertyController::class, 'index']);
+// USER
+Route::post('/properties/{id}', [FavoriteController::class, 'add_favorite']);
+Route::delete('/properties/{id}', [FavoriteController::class, 'remove_favorite']);
+Route::get('/favorites', [FavoriteController::class, 'show_favorites']);
+
+// GLOBAL
+Route::get('/properties', [PropertyController::class, 'findAll']);
+Route::get('/properties/{id}', [PropertyController::class, 'findOne']);
