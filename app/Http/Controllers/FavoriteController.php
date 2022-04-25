@@ -23,5 +23,4 @@ class FavoriteController extends Controller
         $products = $user->favorites()->get();
         return view('favorites', compact('products'));
     }
-
 }
