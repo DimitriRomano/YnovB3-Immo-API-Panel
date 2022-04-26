@@ -133,14 +133,9 @@ class PropertyController extends Controller
             ->with('localisation')
             ->with('type')
             ->with('features')
+            ->with('features.category_features')
             ->with('images')
-            ->first();;
-
-        // CARACTÉRISTIQUES REQUEST
-        $features = Feature::whereHas('properties', function ($query) use ($id) {
-            $query->where('property_id', $id);
-        })->with('category_features')->get();
-
+            ->first();
 
         if($property) {
             return $property;
