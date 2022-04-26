@@ -132,10 +132,10 @@ class PropertyController extends Controller
         $property = Property::where('id', $id)
             ->with('localisation')
             ->with('type')
-            ->with('features')
             ->with('features.category_features')
             ->with('images')
             ->first();
+
 
         if($property) {
             return $property;
