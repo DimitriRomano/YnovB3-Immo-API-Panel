@@ -30,11 +30,11 @@ class PropertySeeder extends Seeder
             $property->price = $faker->numberBetween(70, 400). '000';
             $property->address = $faker->address;
             $property->surface = $faker->numberBetween(20, 200);
-            $property->image = 'https://i.imgur.com/rBVJnRk.png';
+            $property->main_image = $faker -> randomElement($array = array ('https://i.imgur.com/rBVJnRk.png','https://i.imgur.com/cGDjX9x.jpeg','https://i.imgur.com/k8BaoR8.jpeg', 'https://i.imgur.com/fnAFtvU.jpeg'));
             $property->type_id = $faker->numberBetween(1, 3);
             $property->save();
 
-            $list_images = ['https://i.imgur.com/rBVJnRk.png', 'https://i.imgur.com/MFG251G.jpeg', 'https://i.imgur.com/3gfqoFF.jpeg', 'https://i.imgur.com/Vj9XnPX.jpeg'];
+            $list_images = ['https://i.imgur.com/MFG251G.jpeg', 'https://i.imgur.com/3gfqoFF.jpeg', 'https://i.imgur.com/Vj9XnPX.jpeg'];
 
             foreach ($list_images as $image) {
                 $property->images()->create([
@@ -49,20 +49,13 @@ class PropertySeeder extends Seeder
             $localisation->property_id = $property->id;
             $localisation->save();
 
-            $features = ['fibre', 'parking', 'ascensceur', 'balcon', 'terrasse', 'jardin', 'piscine','cheminée'];
-            foreach ($features as $feature) {
-                $nFeatures = Feature::firstOrCreate(
-                    [
-                        'name' => $feature,
-                        'value' => $faker->numberBetween(0, 1)
-                    ]
-                );
-                $nFeatures->save();
+            $features = Feature::all();
 
-                DB::table('feature_property')->insert([
-                    'property_id' => $property->id,
-                    'feature_id' => $nFeatures->id,
-                ]);
+            foreach ($features as $feature) {
+                $chanceOfGettingTrue = rand(1, 100);
+                if ($chanceOfGettingTrue < 60) {
+                    $property->features()->attach($feature->id);
+                }
             }
         }
 

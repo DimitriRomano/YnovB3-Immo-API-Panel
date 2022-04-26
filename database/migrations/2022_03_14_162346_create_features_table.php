@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('features', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('category_features_id');
             $table->string('name');
-            $table->string('value');
-            $table->timestamps();
+            $table->string('value')->default(1);
         });
     }
 

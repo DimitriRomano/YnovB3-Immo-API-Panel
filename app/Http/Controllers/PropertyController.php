@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CategoryFeature;
 use App\Models\Feature;
 use App\Models\Localisation;
 use App\Models\Property;
@@ -132,7 +133,14 @@ class PropertyController extends Controller
             ->with('localisation')
             ->with('type')
             ->with('features')
-            ->get();;
+            ->with('images')
+            ->first();;
+
+        // CARACTÉRISTIQUES REQUEST
+        $features = Feature::whereHas('properties', function ($query) use ($id) {
+            $query->where('property_id', $id);
+        })->with('category_features')->get();
+
 
         if($property) {
             return $property;

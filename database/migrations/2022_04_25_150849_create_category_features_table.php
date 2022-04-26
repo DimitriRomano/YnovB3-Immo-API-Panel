@@ -13,16 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('properties', function (Blueprint $table) {
+        Schema::create('category_features', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('type_id');
-            $table->integer('price');
-            $table->string('title');
-            $table->string('address');
-            $table->text('description');
-            $table->string('main_image');
-            $table->integer('surface');
-            $table->timestamps();
+            $table->string('name');
         });
     }
 
@@ -33,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('properties');
+        Schema::dropIfExists('category_features');
     }
 };
