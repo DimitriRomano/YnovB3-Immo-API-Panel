@@ -29,7 +29,7 @@ class CategoryFeatureSeeder extends Seeder
 
             switch ($catNames[$i]) {
                 case ('Surfaces Annexe'):
-                    $features = ['balcon ou terrasse', 'cave', 'parking', 'jardin'];
+                    $features = ['balcon ou terrasse', 'parking', 'jardin'];
                     break;
 
                 case ('Services et Accessibilité'):
@@ -49,6 +49,7 @@ class CategoryFeatureSeeder extends Seeder
 
                 DB::table('features')->insert([
                     'name' => $feature,
+                    'icon' => '/img/icon_features/'.$feature.'.png',
                     'category_features_id' => $i + 1,
                 ]);
             }

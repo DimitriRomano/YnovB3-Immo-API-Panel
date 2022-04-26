@@ -2,25 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favorite;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FavoriteController extends Controller
 {
     public function add_favorites(Request $request, $id){
-        $user = Auth::user();
-        $user->favorites()->attach($id);
+        $user_id = $request->user()->id;
+        $favorite = new Favorite();
+        $favorite->user_id = $user_id;
+        $favorite->property_id = $id;
+        $favorite->save();
         return response()->json(['success' => 'Product added to favorites']);
     }
 
     public function remove_favorites(Request $request, $id){
-        $user = Auth::user();
-        $user->favorites()->detach($id);
+        $user_id = $request->user()->id;
+        $favorite = Favorite::where('user_id', $user_id)->where('property_id', $id)->first();
+        $favorite->delete();
         return response()->json(['success' => 'Product removed from favorites']);
     }
 
-    public function show_favorites(){
-        $user = Auth::user();
-        $products = $user->favorites()->get();
-        return view('favorites', compact('products'));
+    public function show_favorites(Request $request){
+        $user_id = $request->user()->id;
+        $favorites = Favorite::where('user_id', $user_id)->get();
+        return response()->json(['favorites' => $favorites]);
     }
 }

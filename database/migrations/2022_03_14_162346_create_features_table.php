@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('category_features_id');
             $table->string('name');
+            $table->string('icon');
             $table->string('value')->default(1);
         });
     }

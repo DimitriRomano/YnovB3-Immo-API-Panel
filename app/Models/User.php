@@ -47,7 +47,8 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
-    public function favorites(){
-        return $this->belongsToMany(Property::class, 'favorites');
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
     }
 }

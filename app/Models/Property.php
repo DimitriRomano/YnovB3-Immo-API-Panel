@@ -31,6 +31,6 @@ class Property extends Model
 
     public function favorites()
     {
-        return $this->belongsToMany(User::class, 'favorites');
+        return $this->hasMany(Favorite::class);
     }
 }

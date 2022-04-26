@@ -1,8 +1,11 @@
 <?php
+
+use App\Http\Controllers\FavoriteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PropertyController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -49,8 +52,8 @@ Route::middleware(['auth:sanctum','role:admin'])->group(function () {
 });
 
 // USER
-Route::post('/properties/{id}', [FavoriteController::class, 'add_favorite']);
-Route::delete('/properties/{id}', [FavoriteController::class, 'remove_favorite']);
+Route::post('/favorites/{id}', [FavoriteController::class, 'add_favorites']);
+Route::delete('/favorites/{id}', [FavoriteController::class, 'remove_favorites']);
 Route::get('/favorites', [FavoriteController::class, 'show_favorites']);
 
 // GLOBAL
