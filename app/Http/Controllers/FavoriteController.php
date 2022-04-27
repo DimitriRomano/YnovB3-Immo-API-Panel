@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Favorite;
+use App\Models\Property;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,7 +27,10 @@ class FavoriteController extends Controller
 
     public function show_favorites(Request $request){
         $user_id = $request->user()->id;
-        $favorites = Favorite::where('user_id', $user_id)->get();
-        return response()->json(['favorites' => $favorites]);
+        $properties = Property::whereHas('favorites', function($q) use ($user_id){
+            $q->where('user_id', $user_id);
+        })->get();
+        return response()->json(['properties' => $properties]);
     }
+
 }

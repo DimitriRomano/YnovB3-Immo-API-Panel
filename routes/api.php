@@ -52,9 +52,12 @@ Route::middleware(['auth:sanctum','role:admin'])->group(function () {
 });
 
 // USER
-Route::post('/favorites/{id}', [FavoriteController::class, 'add_favorites']);
-Route::delete('/favorites/{id}', [FavoriteController::class, 'remove_favorites']);
-Route::get('/favorites', [FavoriteController::class, 'show_favorites']);
+Route::middleware(['auth:sanctum'])->group(function(){
+    Route::post('/favorites/{id}', [FavoriteController::class, 'add_favorites']);
+    Route::delete('/favorites/{id}', [FavoriteController::class, 'remove_favorites']);
+    Route::get('/favorites', [FavoriteController::class, 'show_favorites']);
+});
+
 
 // GLOBAL
 Route::get('/properties', [PropertyController::class, 'findAll']);
