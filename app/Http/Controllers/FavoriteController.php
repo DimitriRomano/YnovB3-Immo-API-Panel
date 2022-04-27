@@ -29,7 +29,7 @@ class FavoriteController extends Controller
         $user_id = $request->user()->id;
         $properties = Property::whereHas('favorites', function($q) use ($user_id){
             $q->where('user_id', $user_id);
-        })->get();
+        })->with('images')->get();
         return response()->json(['properties' => $properties]);
     }
 
