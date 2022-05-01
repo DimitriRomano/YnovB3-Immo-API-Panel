@@ -10,7 +10,8 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                museo: ["MuseoModerno", "cursive"],
+                sans: ["League Spartan", "sans-serif"]
             },
         },
     },
