@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class Property extends Model
 {
     use HasFactory;
+    private $is_favorite = false;
 
     public function type()
     {
@@ -35,11 +36,4 @@ class Property extends Model
     {
         return $this->hasMany(Favorite::class);
     }
-
-//    protected $appends = ['is_favorite'];
-//    public function is_favorite(): bool
-//    {
-//        return $this->favorites()->where('user_id', Auth::id())->exists();
-//    }
-
 }
