@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('address');
             $table->text('description');
             $table->string('main_image');
-            $table->string('surface');
+            $table->integer('surface');
             $table->string('nb_rooms')->nullable();
             $table->timestamps();
         });

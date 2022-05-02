@@ -36,25 +36,25 @@ class PropertySeeder extends Seeder
                 case "Appartement":
                     $property->type_id = 1;
                     $property->nb_rooms = "T".$faker->numberBetween(1, 6);
-                    $property->surface= $faker->numberBetween(20, 200)."m²";
+                    $property->surface= $faker->numberBetween(20, 200);
                     break;
 
                 case "Maison":
                     $property->type_id = 2;
                     $property->nb_rooms = $faker->numberBetween(6, 12).' pièces';
-                    $property->surface= $faker->numberBetween(200, 500)."m²";
+                    $property->surface= $faker->numberBetween(200, 500);
                     break;
 
                 case "Chalet":
                     $property->type_id = 3;
                     $property->nb_rooms = $faker->numberBetween(3, 6).' pièces';
-                    $property->surface= $faker->numberBetween(80, 300)."m²";
+                    $property->surface= $faker->numberBetween(80, 300);
                     break;
 
                 case "Villa":
                     $property->type_id = 4;
                     $property->nb_rooms = $faker->numberBetween(12, 24).' pièces';
-                    $property->surface= $faker->numberBetween(400, 1000)."m²";
+                    $property->surface= $faker->numberBetween(400, 1000);
                     break;
             endswitch;
 
