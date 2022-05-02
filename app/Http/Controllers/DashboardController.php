@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Localisation;
 use App\Models\Property;
 use Illuminate\Http\Request;
 
@@ -19,8 +20,7 @@ class DashboardController extends Controller
 
     public function getDashboard()
     {
-        $properties = Property::all();
-        return view('dashboard.home', compact('properties'));
+        return view('dashboard.home');
     }
 
     public function getUser()
@@ -28,13 +28,28 @@ class DashboardController extends Controller
         return view('dashboard.user');
     }
 
+    public function getProperties()
+    {
+        $properties = Property::all();
+        return view('dashboard.properties', compact('properties'));
+    }
+
     public function getProperty()
     {
         return view('dashboard.property');
     }
 
-    public function getOffer()
+    function delete_offer(Request $request, $id)
     {
-        return view('dashboard.offer');
+        $property = Property::find($id);
+        if ($property) {
+            $property->delete();
+
+            $localisation = Localisation::where('property_id', $id)->first();
+            $localisation->delete();
+            return redirect()->back()->with('success', 'Offer deleted successfully');
+        } else {
+            return redirect()->back()->with('error', 'Offer not found');
+        }
     }
 }

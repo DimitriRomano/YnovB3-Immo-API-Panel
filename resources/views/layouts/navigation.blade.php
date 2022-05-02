@@ -15,6 +15,9 @@
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Accueil') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.properties')" :active="request()->routeIs('admin.properties')">
+                        {{ __('Propriétés') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -22,7 +25,7 @@
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                        <button class="flex items-center text-sm font-bold text-gray-100 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ml-1">
@@ -66,13 +69,16 @@
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('Accueil') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.properties')" :active="request()->routeIs('admin.properties')">
+                {{ __('Propriétés') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t bg-gray-100 bg-opacity-50 border-gray-200">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                <div class="font-medium text-base text-gray-100">{{ Auth::user()->name }}</div>
+                <div class="font-medium text-sm text-gray-100">{{ Auth::user()->email }}</div>
             </div>
 
             <div class="mt-3 space-y-1">

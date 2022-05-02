@@ -1,6 +1,7 @@
 <?php
 
     use App\Http\Controllers\DashboardController;
+    use App\Http\Controllers\PropertyController;
     use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,21 +19,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [DashboardController::class,'getDashboard'])->name('home');
+Route::get('/home/admin', [DashboardController::class,'getDashboard'])->name('home');
 
-// Voir toutes les annonces
-Route::get('/admin/properties', [PropertyController::class, 'findAll']);
+Route::middleware('adminWeb')->group(function(){
 
-// Voir une annonce
-Route::get('/admin/properties/{id}', [PropertyController::class, 'findOne']);
+    Route::get('/admin/properties', [DashboardController::class, 'getProperties'])->name('admin.properties');
+    Route::get('/admin/properties/{id}', [DashboardController::class, 'getProperty'])->name('admin.properties.show');
 
-// Créer une annonce
-Route::post('/admin/properties', [PropertyController::class, 'admin_store']);
+    Route::post('/admin/properties', [PropertyController::class, 'admin_store'])->name('admin.properties.create');
 
-// Editer une annonce
-Route::put('/admin/properties/{id}', [PropertyController::class, 'admin_update'])->name('admin.properties.update');
+    Route::put('/admin/properties/{id}', [PropertyController::class, 'admin_update'])->name('admin.properties.update');
 
-// Supprimer une annonce
-Route::delete('/admin/properties/{id}', [PropertyController::class, 'admin_delete'])->name('admin.properties.delete');
+    Route::delete('/admin/properties/{id}', [DashboardController::class, 'delete_offer'])->name('admin.properties.delete');
+});
 
 require __DIR__.'/auth.php';
