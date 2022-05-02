@@ -126,12 +126,16 @@ class PropertyController extends Controller
         }
     }
 
-    // Controller
     function findAll()
     {
+        $user_id = Auth::id();
         $properties = Property::all();
         foreach ($properties as $property) {
-            $property->is_favorite = Favorite::where('property_id', $property->id)->where('user_id', Auth::user()->id)->first() ? true : false;
+            if(Auth::check()) {
+                $property->is_favorite = (bool)Favorite::where('property_id', $property->id)->where('user_id', $user_id)->first();
+            }else{
+                $property->is_favorite = false;
+            }
             $property->type = Type::find($property->type_id);
             $property->images = Image::where('property_id', $property->id)->get();
         }
@@ -140,6 +144,7 @@ class PropertyController extends Controller
 
     function findOne($id)
     {
+        $user_id = Auth::id();
         $property = Property::where('id', $id)
             ->with('localisation')
             ->with('type')
@@ -148,7 +153,11 @@ class PropertyController extends Controller
             ->first();
 
         if($property) {
-            $property->is_favorite = Favorite::where('property_id', $property->id)->where('user_id', Auth::user()->id)->first() ? true : false;
+            if(Auth::check()) {
+                $property->is_favorite = (bool)Favorite::where('property_id', $property->id)->where('user_id', $user_id)->first();
+            }else{
+                $property->is_favorite = false;
+            }
             return $property;
         } else {
             return response()->json("Property not found", 404);
