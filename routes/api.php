@@ -58,7 +58,10 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::get('/favorites', [FavoriteController::class, 'show_favorites']);
 });
 
+Route::get('/test', function() {
+    return Auth::id();
+})->middleware('auth:sanctum');
 
 // GLOBAL
-Route::get('/properties', [PropertyController::class, 'findAll']);
-Route::get('/properties/{id}', [PropertyController::class, 'findOne']);
+Route::get('/properties', [PropertyController::class, 'findAll'])->middleware('auth:sanctum');
+Route::get('/properties/{id}', [PropertyController::class, 'findOne'])->middleware('auth:sanctum');

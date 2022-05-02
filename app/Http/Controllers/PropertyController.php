@@ -7,7 +7,10 @@ use App\Models\Feature;
 use App\Models\Localisation;
 use App\Models\Property;
 use App\Models\Type;
+use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PropertyController extends Controller
 {
@@ -121,7 +124,7 @@ class PropertyController extends Controller
         }
     }
 
-    // GLOBAL
+    // Controller
     function findAll()
     {
         return Property::with('type')->with('images')->get();
@@ -136,9 +139,11 @@ class PropertyController extends Controller
             ->with('images')
             ->first();
 
-
         if($property) {
-            return $property;
+            return response()->json([
+                'is_favorites' => $property->first()->favorites()->where('user_id', Auth::id())->first() ? true : false,
+                'property'=>$property,
+            ], 200);
         } else {
             return response()->json("Property not found", 404);
         }
