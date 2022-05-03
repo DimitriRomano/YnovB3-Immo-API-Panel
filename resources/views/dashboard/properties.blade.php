@@ -1,9 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Propriétés') }}
+        <h2 class="font-semibold text-2xl text-gray-800 leading-tight text-center">
+            {{ __('Liste des propriétés') }}
         </h2>
     </x-slot>
 
-    <x-property.tables :properties="$properties"/>
+    <div class="flex flex-row mx-4 gap-4">
+        <x-filter class="filter"/>
+        <x-property.tables :properties="$properties" class="tableforfilter"/>
+    </div>
 </x-app-layout>

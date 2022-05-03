@@ -61,3 +61,11 @@
 table{
     border-spacing: 16px;
 }
+
+.filter{
+    @apply basis-1/5;
+}
+
+.tableforfilter{
+    @apply basis-full;
+}

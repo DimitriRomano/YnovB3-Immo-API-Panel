@@ -1,4 +1,4 @@
-<div class="card-glass mx-4 px-4 py-2 font-sans">
+<div {{ $attributes->merge(['class'=> "card-glass px-4 py-2 font-sans"])}}>
     <table class="text-left w-full table-fixed border-separate">
         <thead>
         <tr>
