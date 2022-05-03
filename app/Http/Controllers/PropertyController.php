@@ -18,7 +18,7 @@ class PropertyController extends Controller
 {
 
     // ADMIN
-    function admin_store(Request $request)
+    function create(Request $request)
     {
         $request->validate([
             'type' => 'required',
@@ -60,10 +60,10 @@ class PropertyController extends Controller
         }
 
         $property->save();
-        return response()->json('Property created', 201);
+        return redirect()->route('admin.properties');
     }
 
-    function admin_update(Request $request, $id)
+    function update(Request $request, $id)
     {
         $request->validate([
             'type' => 'required',
@@ -106,9 +106,9 @@ class PropertyController extends Controller
             }
 
             $property->save();
-            return response()->json('Property updated', 200);
+            return redirect()->route('admin.properties');
         }else{
-            return response()->json('Property not found', 404);
+            return redirect()->route('admin.properties');
         }
     }
 
@@ -120,9 +120,9 @@ class PropertyController extends Controller
 
             $localisation = Localisation::where('property_id', $id)->first();
             $localisation->delete();
-            return response()->json("Property deleted", 200);
+            return redirect()->route('admin.properties');
         } else {
-            return response()->json("Property not found", 404);
+            return redirect()->route('admin.properties');
         }
     }
 
@@ -139,7 +139,11 @@ class PropertyController extends Controller
             $property->type = Type::find($property->type_id);
             $property->images = Image::where('property_id', $property->id)->get();
         }
-        return $properties;
+        if($properties){
+            return response()->json($properties, 200);
+        }else{
+            return response()->json("Pas de propriétés trouvé", 404);
+        }
     }
 
     function findOne($id)

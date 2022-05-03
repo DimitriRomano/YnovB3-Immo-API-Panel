@@ -4,17 +4,18 @@ namespace App\View\Components\property;
 
 use Illuminate\View\Component;
 
-class Tables extends Component
+class card extends Component
 {
-    public $datas;
+
+    public $property;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($datas)
+    public function __construct($property)
     {
-        $this->datas = $datas;
+        $this->property = $property;
     }
 
     /**
@@ -24,6 +25,6 @@ class Tables extends Component
      */
     public function render()
     {
-        return view('components.property.tables');
+        return view('components.property.card');
     }
 }

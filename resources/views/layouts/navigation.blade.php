@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="border-b border-gray-100">
+<nav x-data="{ open: false }" class="border-b border-gray-100 font-sans">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -15,8 +15,14 @@
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Accueil') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.users')" :active="request()->routeIs('admin.users')">
+                        {{ __('Utilisateurs') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('admin.properties')" :active="request()->routeIs('admin.properties')">
                         {{ __('Propriétés') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.properties.reservations')" :active="request()->routeIs('admin.properties.reservations')">
+                        {{ __('Réservations') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -69,8 +75,14 @@
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('Accueil') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.users')" :active="request()->routeIs('admin.users')">
+                {{ __('Utilisateurs') }}
+            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.properties')" :active="request()->routeIs('admin.properties')">
                 {{ __('Propriétés') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.properties.reservations')" :active="request()->routeIs('admin.properties.reservations')">
+                {{ __('Réservations') }}
             </x-responsive-nav-link>
         </div>
 

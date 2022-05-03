@@ -13,10 +13,14 @@
         radial-gradient(at 18% 63%, hsla(186,86%,73%,1) 0px, transparent 50%);
 }
 
+.badge{
+    @apply inline-block px-2 py-1 leading-none rounded-full font-semibold uppercase tracking-wide text-xs;
+}
+
 .btn{
     @apply font-sans
     font-bold
-    py-1 px-2 rounded-full
+    py-1 px-4 rounded-full
     shadow-gray-700 hover:shadow-lg
     shadow-md;
 }
@@ -26,11 +30,16 @@
 }
 
 .btn-primary{
-    @apply text-gray-600 bg-gradient-to-br from-white to-gray-200 hover:from-gray-100 hover:to-white transition duration-500;
+    @apply text-gray-600 shadow-gray-300 bg-gradient-to-br from-white to-gray-200 hover:from-gray-100 hover:to-white transition duration-500;
 }
 
 .btn-secondary{
     @apply border transition duration-500 text-white;
+}
+
+.btn-green{
+    @apply text-gray-100 bg-gradient-to-br from-green-400 to-green-500 hover:from-green-500 hover:to-green-400 transition duration-500 shadow-green-400;
+    font:message-box;
 }
 
 .btn-danger{

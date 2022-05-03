@@ -36,7 +36,8 @@ class DashboardController extends Controller
 
     public function getProperty()
     {
-        return view('dashboard.property');
+//        return view('dashboard.property');
+        return "hello";
     }
 
     function delete_offer(Request $request, $id)

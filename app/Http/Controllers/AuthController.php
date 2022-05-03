@@ -56,6 +56,12 @@ class AuthController extends Controller
         return $request->user();
     }
 
+    public function findAll(Request $request)
+    {
+        $users = User::all();
+        return view('dashboard.users', compact('users'));
+    }
+
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();

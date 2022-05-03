@@ -1,36 +1,36 @@
 <div {{ $attributes->merge(['class'=> "card-glass px-4 py-2 font-sans"])}}>
-    <table class="text-left w-full table-fixed border-separate">
-        <thead>
-        <tr>
-            <th>{{ __('Image Principale') }}</th>
-            <th>{{ __('Titre') }}</th>
-            <th>{{ __('Description') }}</th>
-            <th>{{ __('Type') }}</th>
-            <th>{{ __('Crée le') }}</th>
-            <th>{{ __('Actions') }}</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach ($properties as $property)
-            <tr>
-                <td>
-                    <img src="{{ $property->main_image }}" alt="{{ $property->title }}" class="img-table">
-                </td>
-                <td class="font-bold">{{ $property->title }}</td>
-                <td>{{ number_format($property->price, 0, ',', ' ') }} €</td>
-                <td>{{ $property->type->name }}</td>
-                <td>{{ $property->created_at->format('d/m/Y') }}</td>
-                <td>
-                    <a href="{{ route('admin.properties.update', $property->id) }}" class="btn btn-primary">Modifier</a>
-                    <form action="{{ route('admin.properties.delete', $property->id) }}" method="POST" class="inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Supprimer</button>
-                    </form>
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
 
-</div>
+
+    <div class="flex flex-wrap">
+        @foreach($datas as $property)
+            <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/5 p-4">
+                <div class="card-glass block shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+                    <a href="">
+                        <div class="relative pb-48 overflow-hidden">
+                            <img class="absolute inset-0 h-full w-full object-cover" src="{{ $property->main_image }}" alt="">
+                        </div>
+                        <div class="p-4">
+                            <span class="badge bg-purple-300 text-purple-800">{{ $property->type->name }}</span>
+                            <span class="badge bg-blue-300 text-blue-800">{{ $property->nb_rooms }} </span>
+                            <span class="badge bg-pink-300 text-pink-800">{{ $property->surface }} m²</span>
+
+                        </div>
+                        <div class="border-t p-4">
+                            <h2 class="mt-2 mb-2 text-2xl font-bold">{{ $property->title }}</h2>
+                            <div class="mt-3 flex items-center">
+                                <span class="font-bold text-xl">{{ number_format($property->price, 0, ',', ' ') }} €</span>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="p-4 border-t">
+                        <a href="{{ route('admin.properties.update', $property->id) }}" class="btn btn-primary">Modifier</a>
+                        <form action="{{ route('admin.properties.delete', $property->id) }}" method="POST" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
