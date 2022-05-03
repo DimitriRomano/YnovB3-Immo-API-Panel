@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\FavoriteController;
-use Illuminate\Http\Request;
+    use App\Http\Controllers\ReservationController;
+    use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PropertyController;
@@ -45,16 +46,17 @@ Route::middleware(['auth:sanctum','role:admin'])->group(function () {
     Route::delete('/admin/properties/{id}', [PropertyController::class, 'admin_delete']);
 
     // Accepter une offre
-    Route::post('/properties/{id}/accept', [PropertyController::class, 'acceptOffer']);
+    Route::post('/properties/{id}/accept', [ReservationController::class, 'accept']);
 
     // Refuser une offre
-    Route::post('/properties/{id}/refuse', [PropertyController::class, 'refuseOffer']);
+    Route::post('/properties/{id}/refuse', [ReservationController::class, 'refuse']);
 });
 
 // USER
 Route::middleware(['auth:sanctum'])->group(function(){
     Route::put('/favorites/{id}', [FavoriteController::class, 'toggle_favorites']);
     Route::get('/favorites', [FavoriteController::class, 'show_favorites']);
+    Route::post('/reservations/{id}', [ReservationController::class, 'create']);
 });
 
 Route::get('/properties', [PropertyController::class, 'findAll']);
