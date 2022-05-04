@@ -66,7 +66,12 @@ class ReservationController extends Controller
 
     public function allReservationForUser(){
         $reservations = Reservation::where('user_id', Auth::id() )->get();
-        return $reservations;
+        return view('dashboard.user.reservations', compact('reservations'));
+    }
+
+    public function user_reservations(){
+        $user = User::find(Auth::id())->with('reservations')->first();
+        return $user;
     }
 
 }

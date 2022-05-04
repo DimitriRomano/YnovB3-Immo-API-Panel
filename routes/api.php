@@ -35,6 +35,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::get('/favorites', [FavoriteController::class, 'show_favorites']);
 
     Route::post('/reservations/{id}', [ReservationController::class, 'create']);
+    Route::get('/user/reservations', [ReservationController::class, 'user_reservations']);
 });
 
 Route::get('/properties', [PropertyController::class, 'findAll']);

@@ -22,7 +22,7 @@
         <div class="relative flex items-top justify-center min-h-screen sm:items-center py-4 sm:pt-0">
             @if (Route::has('login'))
                 <div class="hidden flex flex-col justify-center align-middle gap-32 sm:block text-center text-white">
-                        <h1 class="font-museo text-8xl mb-16">Ymmobilier, l'agence nouvelle génération</h1>
+                        <h1 class="font-museo text-8xl mb-16 mx-auto w-4/5">Ymmobilier, l'agence nouvelle génération</h1>
                     @auth
                         <a href="{{ route('admin.properties') }}" class="btn-welcome btn primary">Dashboard</a>
                     @else
