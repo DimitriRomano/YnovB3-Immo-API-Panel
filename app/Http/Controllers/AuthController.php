@@ -23,7 +23,7 @@ class AuthController extends Controller
         if($image){
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('img'), $imageName);
-            $imagePath = 'img/' . $imageName;
+            $imagePath = '/img/' . $imageName;
         }else{
             $imagePath = 'img/user.jpg';
         }
@@ -100,7 +100,7 @@ class AuthController extends Controller
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('img'), $imageName);
-            $imagePath = 'img/' . $imageName;
+            $imagePath = '/img/' . $imageName;
             $user->image = $imagePath;
         }
 

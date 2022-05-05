@@ -24,34 +24,4 @@
             </div>
         @endforeach
     </div>
-
-{{--    <table class="text-left w-full table-fixed border-separate">--}}
-{{--        <thead>--}}
-{{--        <tr>--}}
-{{--            <th>{{ __('Image Principale') }}</th>--}}
-{{--            <th>{{ __('Titre') }}</th>--}}
-{{--            <th>{{ __('Type') }}</th>--}}
-{{--            <th>{{ __('Demande de visite') }}</th>--}}
-{{--            <th>{{ __('Dernière réservation le') }}</th>--}}
-{{--            <th>{{ __('Actions') }}</th>--}}
-{{--        </tr>--}}
-{{--        </thead>--}}
-{{--        <tbody>--}}
-{{--        @foreach ($properties as $property)--}}
-{{--            <tr>--}}
-{{--                <td>--}}
-{{--                    <img src="{{ $property->main_image }}" alt="{{ $property->title }}" class="img-table">--}}
-{{--                </td>--}}
-{{--                <td>{{ $property->title }}</td>--}}
-{{--                <td>{{ $property->type->name }}</td>--}}
-{{--                <td class="font-bold">{{ $property->reservations()->count() }}</td>--}}
-{{--                <td>{{ $property->reservations()->orderBy('created_at','desc')->first()->created_at }}</td>--}}
-{{--                <td>--}}
-{{--
-{{--                </td>--}}
-{{--            </tr>--}}
-{{--        @endforeach--}}
-{{--        </tbody>--}}
-{{--    </table>--}}
-
 </div>

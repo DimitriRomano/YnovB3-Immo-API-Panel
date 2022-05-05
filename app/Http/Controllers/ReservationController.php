@@ -73,5 +73,4 @@ class ReservationController extends Controller
         $user = User::find(Auth::id())->with('reservations')->first();
         return $user;
     }
-
 }

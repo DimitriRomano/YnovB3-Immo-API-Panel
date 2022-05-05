@@ -24,7 +24,15 @@
                 <div class="hidden flex flex-col justify-center align-middle gap-32 sm:block text-center text-white">
                         <h1 class="font-museo text-8xl mb-16 mx-auto w-4/5">Ymmobilier, l'agence nouvelle génération</h1>
                     @auth
-                        <a href="{{ route('admin.properties') }}" class="btn-welcome btn primary">Dashboard</a>
+                        <a href="{{ route('admin.properties') }}" class="inline btn-welcome btn btn-primary">Dashboard</a>
+                        <form method="POST" action="{{ route('logout') }}" class="inline">
+                            @csrf
+
+                            <a href="route('logout')" class="btn btn-welcome btn-danger font-extrabold" onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                                {{ __('Déconnexion') }}
+                            </a>
+                        </form>
                     @else
                         <a href="{{ route('login') }}" class="btn-welcome btn btn-primary">Log in</a>
 

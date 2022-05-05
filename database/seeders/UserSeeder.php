@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
                 'name' => 'admin',
                 'email' => 'admin@test.com',
                 'phone' => '0102030405',
-                'image' => 'img/admin.jpg',
+                'image' => '/img/admin.jpg',
                 'password' => bcrypt('admin')
             ],
             [
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
                 'name' => 'user',
                 'email' => 'user@test.com',
                 'phone' => '0102030406',
-                'image' => 'img/user.jpg',
+                'image' => '/img/user.jpg',
                 'password' => bcrypt('user')
             ]
         ]);
