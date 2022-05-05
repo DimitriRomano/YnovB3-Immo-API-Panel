@@ -70,7 +70,7 @@ class ReservationController extends Controller
     }
 
     public function user_reservations(){
-        $user = User::find(Auth::id())->with('reservations')->first();
+        $user = User::find(Auth::id())->with('reservations.property.type')->first();
         return $user;
     }
 }
