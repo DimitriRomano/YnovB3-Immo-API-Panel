@@ -28,8 +28,8 @@ Route::post('/login', [AuthController::class, 'login']);
 
 // USER
 Route::middleware(['auth:sanctum'])->group(function(){
-    Route::get('/me', [AuthController::class, 'me']);
     Route::get('/user', [AuthController::class, 'me']);
+    Route::put('/user/edit', [AuthController::class, 'update']);
 
     Route::put('/favorites/{id}', [FavoriteController::class, 'toggle_favorites']);
     Route::get('/favorites', [FavoriteController::class, 'show_favorites']);

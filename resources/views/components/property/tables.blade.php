@@ -23,7 +23,7 @@
                         </div>
                     </a>
                     <div class="p-4 border-t">
-                        <a href="{{ route('admin.properties.update', $property->id) }}" class="btn btn-primary">Modifier</a>
+                        <a href="{{ route('admin.properties.form.edit', $property->id) }}" class="btn btn-primary">Modifier</a>
                         <form action="{{ route('admin.properties.delete', $property->id) }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')

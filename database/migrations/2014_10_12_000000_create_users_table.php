@@ -18,6 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('role_id')->default(2);
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('phone')->unique()->default("0000000000");
+            $table->string('image')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

@@ -37,7 +37,19 @@ class DashboardController extends Controller
     public function getProperty()
     {
 //        return view('dashboard.property');
-        return "hello";
+        return "Soon";
+    }
+
+    public function getFormCreate()
+    {
+        return view('dashboard.properties');
+    }
+
+    public function getFormEdit($id)
+    {
+        $property = Property::find($id);
+
+        return view('dashboard.properties', compact('property'));
     }
 
     function delete_offer(Request $request, $id)

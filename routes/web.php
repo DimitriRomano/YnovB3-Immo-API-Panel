@@ -28,6 +28,8 @@ Route::middleware('adminWeb')->group(function(){
     Route::get('/admin/properties', [DashboardController::class, 'getProperties'])->name('admin.properties');
 //    Route::get('/admin/properties/{id}', [DashboardController::class, 'getProperty'])->name('admin.properties.show');
 
+    Route::get('/admin/properties/create', [DashboardController::class, 'getFormCreate'])->name('admin.properties.form.create');
+    Route::get('/admin/properties/edit/{id}', [DashboardController::class, 'getFormEdit'])->name('admin.properties.form.edit');
     Route::post('/admin/properties', [PropertyController::class, 'store'])->name('admin.properties.create');
     Route::put('/admin/properties/{id}', [PropertyController::class, 'update'])->name('admin.properties.update');
     Route::delete('/admin/properties/{id}', [DashboardController::class, 'delete_offer'])->name('admin.properties.delete');

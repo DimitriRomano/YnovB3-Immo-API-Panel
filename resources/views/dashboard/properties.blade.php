@@ -6,15 +6,20 @@
                     <h2 class="font-semibold text-2xl text-gray-800 leading-tight text-center">
                         {{ __('Liste des propriétés') }}
                     </h2>
-                    <a href="{{ route('admin.properties.create') }}" class="btn btn-primary">
+                    <a href="{{ route('admin.properties.form.create') }}" class="btn btn-primary">
                         {{ __('Ajouter une propriété') }}
                     </a>
                     @break
-                @case('admin.property.create')
+                @case('admin.properties.form.create')
                     <h2 class="font-semibold text-2xl text-gray-800 leading-tight text-center">
-                        {{ __('Liste des propriétés') }}
+                        {{ __('Créer une propriété') }}
                     </h2>
                     @break
+                @case('admin.properties.form.edit')
+                <h2 class="font-semibold text-2xl text-gray-800 leading-tight text-center">
+                    {{ __('Modifier : '. $property->title) }}
+                </h2>
+                @break
             @endswitch
         </div>
 
@@ -26,8 +31,11 @@
             {{--        <x-filter class="filter"/>--}}
             <x-property.tables :datas="$properties" class="tableforfilter"/>
             @break
-            @case('admin.property.create')
-            <x-property.form :item="$property"/>
+            @case('admin.properties.form.create')
+            <x-property.form :property=null/>
+            @break
+            @case('admin.properties.form.edit')
+            <x-property.form :property="$property"/>
             @break
         @endswitch
     </div>
