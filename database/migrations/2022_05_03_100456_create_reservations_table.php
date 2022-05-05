@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('property_id');
-            $table->string('status')->enum(['pending', 'in progress', 'approved', 'rejected'])->default('pending');
+            $table->string('status')->enum(['pending', 'approved', 'rejected'])->default('pending');
             $table->timestamps();
         });
     }

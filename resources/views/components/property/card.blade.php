@@ -1,4 +1,4 @@
-<div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/5 p-4">
+<div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4">
     <div class="card-glass block shadow-md hover:shadow-xl rounded-lg overflow-hidden">
         <a href="">
             <div class="relative pb-48 overflow-hidden">
