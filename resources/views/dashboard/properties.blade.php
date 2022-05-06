@@ -32,10 +32,10 @@
             <x-property.tables :datas="$properties" class="tableforfilter"/>
             @break
             @case('admin.properties.form.create')
-            <x-property.form :property=null/>
+            <x-property.formcreate :property=null :features="$features" :types="$types" />
             @break
             @case('admin.properties.form.edit')
-            <x-property.form :property="$property" :features="$features" :types="$types"/>
+            <x-property.formedit :property="$property" :features="$features" :types="$types"/>
             @break
         @endswitch
     </div>

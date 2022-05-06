@@ -49,10 +49,11 @@ class ReservationController extends Controller
     }
 
     public function allProperties(){
+        $all_properties = Property::withCount('reservations')->orderBy('reservations_count', 'desc')->get();
 
-        $properties = Property::whereHas('reservations', function($query){
-            $query->where('status', '!=', null);
-        })->get();
+        $properties = $all_properties->filter(function ($property) {
+            return $property->reservations_count > 0;
+        });
 
         return view('dashboard.reservations', compact('properties'));
     }

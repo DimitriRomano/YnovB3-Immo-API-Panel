@@ -30,12 +30,16 @@ Route::middleware('adminWeb')->group(function(){
 
     Route::get('/admin/properties/create', [DashboardController::class, 'getFormCreate'])->name('admin.properties.form.create');
     Route::get('/admin/properties/edit/{id}', [DashboardController::class, 'getFormEdit'])->name('admin.properties.form.edit');
-    Route::post('/admin/properties', [PropertyController::class, 'store'])->name('admin.properties.create');
+    Route::post('/admin/properties', [PropertyController::class, 'create'])->name('admin.properties.create');
     Route::put('/admin/properties/{id}', [PropertyController::class, 'update'])->name('admin.properties.update');
-    Route::delete('/admin/properties/{id}', [DashboardController::class, 'delete_offer'])->name('admin.properties.delete');
+    Route::delete('/admin/properties/{id}', [PropertyController::class, 'admin_delete'])->name('admin.properties.delete');
 
-    // Voir tous les utilisateurs
+    // USERS
     Route::get('/admin/users', [AuthController::class, 'findAll'])->name('admin.users');
+    Route::get('/admin/users/{id}', [DashboardController::class, 'admin_user_edit'])->name('admin.users.edit');
+    Route::put('/admin/users/{id}', [AuthController::class, 'admin_update'])->name('admin.users.update');
+    Route::delete('/admin/users/{id}', [AuthController::class, 'admin_delete'])->name('admin.users.delete');
+
 
     // Réservations
     Route::get('/admin/properties/reservations', [ReservationController::class, 'allProperties'])->name('admin.properties.reservations');

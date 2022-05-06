@@ -20,46 +20,53 @@ class PropertyController extends Controller
     // ADMIN
     function create(Request $request)
     {
-        $request->validate([
-            'type' => 'required',
-            'price' => 'required',
-            'title' => 'required',
-            'address' => 'required',
-            'image' => 'required',
-            'surface' => 'required',
-            'localisation' => 'required',
-            'features' => 'required'
-        ]);
-
         $property = new Property();
-//        if($request->hasFile('image')) {
-//            $image = $request->file('image');
-//            $imageName = time().'.'.$image->getClientOriginalExtension();
-//            $image->move(public_path('images'), $imageName);
-//            $property->image = $imageName;
-//        }
-        $property->price = $request->price;
+        $main_image = $request->main_image;
+        $imagesSecondaries = $request->images;
+        if($main_image){
+            $imageName = time().'.'.$main_image->getClientOriginalExtension();
+            $main_image->move(public_path('img'), $imageName);
+            $imagePath = '/img/'.$imageName;
+            $property->main_image = $imagePath;
+        }
         $property->title = $request->title;
+        $property->price = $request->price;
         $property->description = $request->description;
         $property->address = $request->address;
-        $property->image = $request->image;
         $property->surface = $request->surface;
-        $property->type_id = Type::where('name', $request->type['name'])->first()->id;
+        $property->type_id = $request->type_id;
+        $property->nb_rooms = $request->nb_rooms;
         $property->save();
-        $property->localisation()->create(['property_id' => $property->id, 'latitude' => $request->localisation['latitude'], 'longitude' => $request->localisation['longitude']]);
 
-        $features = $request->features;
-        foreach ($features as $feature) {
-            $feature = Feature::firstOrCreate(
-                [
-                    'name' => $feature['name'],
-                    'value' => $feature['value']
-                ]
-            );
-            $property->features()->attach($feature);
+
+
+        if($imagesSecondaries) {
+            foreach ($imagesSecondaries as $imagesSecondary) {
+                $imageName = time() . '.' . $imagesSecondary->getClientOriginalExtension();
+                $imagesSecondary->move(public_path('img/properties'), $imageName);
+                $imagePath ='/img/properties/' . $imageName;
+
+                $image = new Image();
+                $image->url = $imagePath;
+                $image->property_id = $property->id;
+                $image->save();
+            }
         }
 
+        $localisation = new Localisation();
+        $localisation->property_id = $property->id;
+        $localisation->latitude = $request->latitude;
+        $localisation->longitude = $request->longitude;
+        $localisation->save();
+
+        $features = $request->features;
+
+        $property->features()->detach();
+        foreach ($features as $feature) {
+            $property->features()->attach($feature);
+        }
         $property->save();
+
         return redirect()->route('admin.properties');
     }
 
@@ -68,53 +75,57 @@ class PropertyController extends Controller
 
         $main_image = $request->main_image;
         $property = Property::findOrFail($id);
-        if( $property){
-            if($main_image){
-               $imageName = time().'.'.$main_image->getClientOriginalExtension();
-               $main_image->move(public_path('img'), $imageName);
-               $imagePath = public_path('/img/'.$imageName);
-               $property->main_image = $imagePath;
-            }
-
-            $property->title = $request->title;
-            $property->price = $request->price;
-            $property->description = $request->description;
-            $property->address = $request->address;
-            $property->surface = $request->surface;
-            $property->type_id = $request->type_id;
-            $property->save();
-            $property->localisation()->update(['latitude' => $request->latitude, 'longitude' => $request->longitude]);
-
-            $features = $request->features;
-
-            $property->features()->detach();
-            foreach ($features as $feature) {
-                $property->features()->attach($feature);
-            }
-            $property->save();
-
-            return redirect()->route('admin.properties');
-        }else{
-            return redirect()->route('admin.properties');
+        if($main_image){
+           $imageName = time().'.'.$main_image->getClientOriginalExtension();
+           $main_image->move(public_path('img\properties'), $imageName);
+            $imagePath = '/img/'.$imageName;
+           $property->main_image = $imagePath;
         }
 
+        $imagesSecondaries = $request->images;
+        if($imagesSecondaries) {
+            foreach ($imagesSecondaries as $imagesSecondary) {
+                $imageName = time() . '.' . $imagesSecondary->getClientOriginalExtension();
+                $imagesSecondary->move(public_path('img/properties'), $imageName);
+                $imagePath = '/img/properties/' . $imageName;
+
+                $image = new Image();
+                $image->url = $imagePath;
+                $image->property_id = $property->id;
+                $image->save();
+            }
+        }
+
+        $property->title = $request->title;
+        $property->price = $request->price;
+        $property->description = $request->description;
+        $property->address = $request->address;
+        $property->surface = $request->surface;
+        $property->type_id = $request->type_id;
+        $property->nb_rooms = $request->nb_rooms;
         $property->save();
-        return "Updated";
+        $property->localisation()->update(['latitude' => $request->latitude, 'longitude' => $request->longitude]);
+
+        $features = $request->features;
+
+        $property->features()->detach();
+        foreach ($features as $feature) {
+            $property->features()->attach($feature);
+        }
+        $property->save();
+
+        return redirect()->route('admin.properties');
 
     }
 
-    function admin_delete(Request $request, $id)
+    function admin_delete($id)
     {
         $property = Property::find($id);
-        if ($property) {
-            $property->delete();
+        $property->delete();
 
-            $localisation = Localisation::where('property_id', $id)->first();
-            $localisation->delete();
-            return redirect()->route('admin.properties');
-        } else {
-            return redirect()->route('admin.properties');
-        }
+        $localisation = Localisation::where('property_id', $id)->first();
+        $localisation->delete();
+        return redirect()->route('admin.properties');
     }
 
     function findAll()

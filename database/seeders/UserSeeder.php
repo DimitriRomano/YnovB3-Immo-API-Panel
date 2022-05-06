@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Reservation;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 
 class UserSeeder extends Seeder
 {
@@ -15,6 +18,8 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $this->faker = Faker::create();
+
         DB::table('users')->insert([
             [
                 'role_id' => 1,
@@ -38,20 +43,8 @@ class UserSeeder extends Seeder
 
         DB::table('reservations')->insert([
             [
-                'user_id' => 1,
-                'property_id' => 1,
-                'status' => 'pending',
-                'created_at' => now(),
-            ],
-            [
                 'user_id' => 2,
                 'property_id' => 1,
-                'status' => 'pending',
-                'created_at' => now(),
-            ],
-            [
-                'user_id' => 1,
-                'property_id' => 3,
                 'status' => 'pending',
                 'created_at' => now(),
             ],
@@ -62,5 +55,16 @@ class UserSeeder extends Seeder
                 'created_at' => now(),
             ]
         ]);
+
+        for ($i = 1; $i <=10; $i++){
+            $user = User::factory()->create();
+
+            $reservation = new Reservation();
+            $reservation->user_id = $user->id;
+            $reservation->property_id = $this->faker->numberBetween(1, 10);
+            $reservation->status = 'pending';
+            $reservation->save();
+        }
+
     }
 }

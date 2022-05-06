@@ -6,6 +6,13 @@
     </x-slot>
 
     <div class="flex flex-row mx-4 gap-4">
-        <x-users.tables :datas="$users" class="tableforfilter"/>
+        @switch(request()->route()->getName())
+            @case('admin.users')
+                <x-users.tables :datas="$users" class="tableforfilter"/>
+                @break
+            @case('admin.users.edit')
+                <x-users.formedit :user="$user" :roles="$roles" class="tableforfilter"/>
+                @break
+        @endswitch
     </div>
 </x-app-layout>

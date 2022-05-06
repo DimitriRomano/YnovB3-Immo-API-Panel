@@ -2,7 +2,7 @@
     <table class="text-left w-full table-fixed border-separate">
         <thead>
         <tr>
-            <th>{{__('Photo de profil')}}</th>
+            <th>{{__('Photo')}}</th>
             <th>{{ __('Email') }}</th>
             <th>{{ __('Nom') }}</th>
             <th>{{ __('Téléphone') }}</th>
@@ -13,7 +13,7 @@
         @foreach ($datas as $data)
             <tr>
                 <td>
-                    <img src="{{ $data->user->image }}" class="w-12 h-12 ml-8 rounded-full" alt="">
+                    <img src="{{ $data->user->image }}" class="w-12 h-12 rounded-full" alt="">
                 </td>
                 <td>{{ $data->user->email}}</td>
                 <td>{{ $data->user->name}}</td>

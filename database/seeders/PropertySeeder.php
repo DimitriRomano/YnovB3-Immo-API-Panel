@@ -29,7 +29,7 @@ class PropertySeeder extends Seeder
             $property->description = $faker->paragraph($nbSentences = 3, $variableNbSentences = true);
             $property->price = $faker->numberBetween(70, 400) . '000';
             $property->address = $faker->address;
-            $property->main_image = $faker->randomElement($array = array('https://i.imgur.com/rBVJnRk.png', 'https://i.imgur.com/cGDjX9x.jpeg', 'https://i.imgur.com/k8BaoR8.jpeg', 'https://i.imgur.com/fnAFtvU.jpeg'));
+            $property->main_image = $faker->randomElement($array = array('https://i.imgur.com/jgZibdz.jpeg', 'https://i.imgur.com/cGDjX9x.jpeg', 'https://i.imgur.com/k8BaoR8.jpeg', 'https://i.imgur.com/fnAFtvU.jpeg'));
             $typeProperty = $faker->randomElement($array = array('Appartement', 'Maison', 'Chalet', 'Villa'));
 
             switch ($typeProperty):

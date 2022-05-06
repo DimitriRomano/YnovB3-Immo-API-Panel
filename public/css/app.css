@@ -668,11 +668,11 @@ select {
 .ml-4 {
   margin-left: 1rem;
 }
-.ml-1 {
-  margin-left: 0.25rem;
-}
 .mr-2 {
   margin-right: 0.5rem;
+}
+.ml-1 {
+  margin-left: 0.25rem;
 }
 .ml-2 {
   margin-left: 0.5rem;
@@ -697,6 +697,9 @@ select {
 }
 .-mr-2 {
   margin-right: -0.5rem;
+}
+.mt-12 {
+  margin-top: 3rem;
 }
 .block {
   display: block;
@@ -755,6 +758,9 @@ select {
 .w-20 {
   width: 5rem;
 }
+.w-1\/2 {
+  width: 50%;
+}
 .w-8 {
   width: 2rem;
 }
@@ -763,9 +769,6 @@ select {
 }
 .w-12 {
   width: 3rem;
-}
-.w-1\/2 {
-  width: 50%;
 }
 .w-48 {
   width: 12rem;
@@ -999,11 +1002,11 @@ select {
 .p-4 {
   padding: 1rem;
 }
-.p-6 {
-  padding: 1.5rem;
-}
 .p-8 {
   padding: 2rem;
+}
+.p-6 {
+  padding: 1.5rem;
 }
 .p-2 {
   padding: 0.5rem;
@@ -1469,11 +1472,33 @@ table {
 .space-table-lg tr > td:nth-child(1) {
     width: 30%;
 }
+th:nth-child(1) {
+    width: 7%;
+}
 .filter {
   flex-basis: 20%;
 }
 .tableforfilter {
   flex-basis: 100%;
+}
+.btn-file {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+.btn-file:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 .hover\:border-gray-300:hover {
   --tw-border-opacity: 1;

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Feature;
 use App\Models\Localisation;
 use App\Models\Property;
+use App\Models\Role;
 use App\Models\Type;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -44,7 +46,10 @@ class DashboardController extends Controller
 
     public function getFormCreate()
     {
-        return view('dashboard.properties');
+        $features = Feature::all();
+        $types = Type::all();
+
+        return view('dashboard.properties', compact('features', 'types'));
     }
 
     public function getFormEdit($id)
@@ -56,17 +61,10 @@ class DashboardController extends Controller
         return view('dashboard.properties', compact('property', 'features', 'types'));
     }
 
-    function delete_offer(Request $request, $id)
-    {
-        $property = Property::find($id);
-        if ($property) {
-            $property->delete();
+    public function admin_user_edit($id){
+        $user = User::find($id);
+        $roles = Role::all();
 
-            $localisation = Localisation::where('property_id', $id)->first();
-            $localisation->delete();
-            return redirect()->back()->with('success', 'Offer deleted successfully');
-        } else {
-            return redirect()->back()->with('error', 'Offer not found');
-        }
+        return view('dashboard.users', compact('user', 'roles'));
     }
 }

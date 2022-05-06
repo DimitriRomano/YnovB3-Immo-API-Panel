@@ -76,10 +76,18 @@ table{
     width: 30%;
 }
 
+th:nth-child(1) {
+    width: 7%;
+}
+
 .filter{
     @apply basis-1/5;
 }
 
 .tableforfilter{
     @apply basis-full;
+}
+
+.btn-file{
+    @apply block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none
 }

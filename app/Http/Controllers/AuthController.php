@@ -114,4 +114,29 @@ class AuthController extends Controller
             'message' => 'Successfully updated'
         ]);
     }
+
+    public function admin_update(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone= "0".$request->phone;
+        if($request->password){
+            $user->password = Hash::make($request->password);
+        }
+        $user->role_id = $request->role_id;
+        $user->save();
+
+
+        return redirect()->route('admin.users');
+    }
+
+    public function admin_delete($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect('/admin/users');
+    }
 }
