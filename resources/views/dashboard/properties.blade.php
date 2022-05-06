@@ -35,7 +35,7 @@
             <x-property.form :property=null/>
             @break
             @case('admin.properties.form.edit')
-            <x-property.form :property="$property"/>
+            <x-property.form :property="$property" :features="$features" :types="$types"/>
             @break
         @endswitch
     </div>

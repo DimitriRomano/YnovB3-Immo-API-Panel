@@ -65,56 +65,41 @@ class PropertyController extends Controller
 
     function update(Request $request, $id)
     {
-//        $request->validate([
-//            'type' => 'required',
-//            'price' => 'required',
-//            'title' => 'required',
-//            'address' => 'required',
-//            'image' => 'required',
-//            'surface' => 'required',
-//            'localisation' => 'required',
-//            'features' => 'required'
-//        ]);
-//
-//        $property = Property::findOrFail($id);
-//        if( $property){
-////        if ($request->hasFile('image')) {
-////            $image = $request->file('image');
-////            $imageName = time().'.'.$image->getClientOriginalExtension();
-////            $image->move(public_path('images'), $imageName);
-////            $property->image = $imageName;
-////        }
-//            $property->price = $request->price;
-//            $property->title = $request->title;
-//            $property->description = $request->description;
-//            $property->address = $request->address;
-//            $property->image = $request->image;
-//            $property->surface = $request->surface;
-//            $property->type_id = Type::where('name', $request->type['name'])->first()->id;
-//            $property->save();
-//            $property->localisation()->update(['latitude' => $request->localisation['latitude'], 'longitude' => $request->localisation['longitude']]);
-//
-//            $features = $request->features;
-//            foreach ($features as $feature) {
-//                $feature = Feature::firstOrCreate(
-//                    [
-//                        'name' => $feature['name'],
-//                        'value' => $feature['value']
-//                    ]
-//                );
-//                $property->features()->attach($feature);
-//            }
-//
-//            $property->save();
-//            return redirect()->route('admin.properties');
-//        }else{
-//            return redirect()->route('admin.properties');
-//        }$
 
+        $main_image = $request->main_image;
         $property = Property::findOrFail($id);
-        $property->title = $request->title;
+        if( $property){
+            if($main_image){
+               $imageName = time().'.'.$main_image->getClientOriginalExtension();
+               $main_image->move(public_path('img'), $imageName);
+               $imagePath = public_path('/img/'.$imageName);
+               $property->main_image = $imagePath;
+            }
+
+            $property->title = $request->title;
+            $property->price = $request->price;
+            $property->description = $request->description;
+            $property->address = $request->address;
+            $property->surface = $request->surface;
+            $property->type_id = $request->type_id;
+            $property->save();
+            $property->localisation()->update(['latitude' => $request->latitude, 'longitude' => $request->longitude]);
+
+            $features = $request->features;
+
+            $property->features()->detach();
+            foreach ($features as $feature) {
+                $property->features()->attach($feature);
+            }
+            $property->save();
+
+            return redirect()->route('admin.properties');
+        }else{
+            return redirect()->route('admin.properties');
+        }
+
         $property->save();
-        return "hello";
+        return "Updated";
 
     }
 

@@ -2,16 +2,22 @@
     <table class="text-left w-full table-fixed border-separate">
         <thead>
         <tr>
+            <th>{{__('Photo de profil')}}</th>
             <th>{{ __('Email') }}</th>
             <th>{{ __('Nom') }}</th>
+            <th>{{ __('Téléphone') }}</th>
             <th>{{ __('Actions') }}</th>
         </tr>
         </thead>
         <tbody>
         @foreach ($datas as $data)
             <tr>
-                <td class="font-bold">{{ $data->user->email}}</td>
+                <td>
+                    <img src="{{ $data->user->image }}" class="w-12 h-12 ml-8 rounded-full" alt="">
+                </td>
+                <td>{{ $data->user->email}}</td>
                 <td>{{ $data->user->name}}</td>
+                <td>{{ $data->user->phone}}</td>
                 <td>
                     @switch($data->status)
                         @case('pending')
@@ -27,10 +33,10 @@
                             </form>
                         @break
                         @case('approved')
-                            <span class="text-green-500">{{ __('Accepté') }}</span>
+                            <span class="badge bg-green-300 text-green-800">{{ __('Accepté') }}</span>
                         @break
                         @case('rejected')
-                            <span class="text-red-500">{{ __('Refusé') }}</span>
+                            <span class="badge bg-red-300 text-red-800">{{ __('Refusé') }}</span>
                         @break
                     @endswitch
 

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Feature;
 use App\Models\Localisation;
 use App\Models\Property;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -48,8 +50,10 @@ class DashboardController extends Controller
     public function getFormEdit($id)
     {
         $property = Property::find($id);
+        $features = Feature::all();
+        $types = Type::all();
 
-        return view('dashboard.properties', compact('property'));
+        return view('dashboard.properties', compact('property', 'features', 'types'));
     }
 
     function delete_offer(Request $request, $id)

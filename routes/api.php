@@ -36,6 +36,8 @@ Route::middleware(['auth:sanctum'])->group(function(){
 
     Route::post('/reservations/{id}', [ReservationController::class, 'create']);
     Route::get('/user/reservations', [ReservationController::class, 'user_reservations']);
+
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
 
 Route::get('/properties', [PropertyController::class, 'findAll']);

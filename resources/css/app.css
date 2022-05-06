@@ -68,7 +68,12 @@
 }
 
 table{
+    @apply border-separate;
     border-spacing: 16px;
+}
+
+.space-table-lg tr > td:nth-child(1) {
+    width: 30%;
 }
 
 .filter{
