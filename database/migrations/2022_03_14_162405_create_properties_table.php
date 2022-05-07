@@ -15,10 +15,14 @@ return new class extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('type_id');
+            $table->integer('price');
             $table->string('title');
-            $table->string('description');
-            $table->string('photos');
+            $table->string('address');
+            $table->text('description');
+            $table->string('main_image');
             $table->integer('surface');
+            $table->string('nb_rooms')->nullable();
             $table->timestamps();
         });
     }
