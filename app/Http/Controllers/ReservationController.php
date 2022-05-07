@@ -16,13 +16,20 @@ class ReservationController extends Controller
         $this->middleware('auth');
     }
     public function create($id){
-        $reservation = new Reservation;
-        $reservation->user_id = Auth::id();
-        $reservation->property_id = $id;
-        $reservation->status = 'in progress';
-        $reservation->save();
+        $reservation = Reservation::where('property_id',$id)->where('user_id',Auth::user()->id)->first();
+        if($reservation){
+            return response()->json(['error'=>'You already have a reservation for this property'],422);
+        }else{
+            $reservation = new Reservation;
+            $reservation->user_id = Auth::id();
+            $reservation->property_id = $id;
+            $reservation->status = 'in progress';
+            $reservation->save();
 
-        return response()->json(['success' => 'Merci, nous traitons votre demande.']);
+            return response()->json(['success' => 'Merci, nous traitons votre demande.']);
+        }
+
+
     }
 
     public function accept($id){
