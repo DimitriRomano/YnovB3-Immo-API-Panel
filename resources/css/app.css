@@ -80,6 +80,10 @@ th:nth-child(1) {
     width: 7%;
 }
 
+.tableUsers th:nth-child(5) {
+    width: 10%;
+}
+
 .filter{
     @apply basis-1/5;
 }

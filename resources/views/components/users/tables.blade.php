@@ -1,5 +1,5 @@
 <div {{ $attributes->merge(['class'=> "card-glass px-4 py-2 font-sans"])}}>
-    <table class="text-left w-full table-fixed border-separate">
+    <table class="text-left w-full table-fixed border-separate tableUsers">
         <thead>
         <tr>
             <th>{{ __('Photo') }}</th>

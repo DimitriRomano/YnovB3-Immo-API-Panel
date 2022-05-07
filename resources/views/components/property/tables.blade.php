@@ -5,7 +5,7 @@
         @foreach($datas as $property)
             <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/5 p-4">
                 <div class="card-glass block shadow-md hover:shadow-xl rounded-lg overflow-hidden">
-                    <a href="">
+                    <a href="{{ route('admin.properties.form.edit', $property->id) }}">
                         <div class="relative pb-48 overflow-hidden">
                             <img class="absolute inset-0 h-full w-full object-cover" src="{{ $property->main_image }}" alt="">
                         </div>
