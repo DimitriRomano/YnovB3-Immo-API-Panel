@@ -164,7 +164,7 @@ class PropertyController extends Controller
             }else{
                 $property->is_favorite = false;
             }
-            return $property;
+            return response()->json($property, 200);
         } else {
             return response()->json("Property not found", 404);
         }
