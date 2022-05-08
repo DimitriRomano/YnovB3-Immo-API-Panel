@@ -23,7 +23,6 @@ class ReservationController extends Controller
             $reservation = new Reservation;
             $reservation->user_id = Auth::id();
             $reservation->property_id = $id;
-            $reservation->status = 'in progress';
             $reservation->save();
 
             return response()->json(['success' => 'Merci, nous traitons votre demande.']);
