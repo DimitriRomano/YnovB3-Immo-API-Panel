@@ -18,7 +18,7 @@ class ReservationController extends Controller
     public function create($id){
         $reservation = Reservation::where('property_id',$id)->where('user_id',Auth::user()->id)->first();
         if($reservation){
-            return response()->json(['error'=>'You already have a reservation for this property'],422);
+            return response()->json(['error'=>'Vous avez déjà une réservation pour cette propriété'],422);
         }else{
             $reservation = new Reservation;
             $reservation->user_id = Auth::id();
