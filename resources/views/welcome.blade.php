@@ -34,10 +34,10 @@
                             </a>
                         </form>
                     @else
-                        <a href="{{ route('login') }}" class="btn-welcome btn btn-primary">Log in</a>
+                        <a href="{{ route('login') }}" class="btn-welcome btn btn-primary">Se connecter</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 btn-welcome btn btn-secondary">Register</a>
+                            <a href="{{ route('register') }}" class="ml-4 btn-welcome btn btn-secondary">Créer un compte</a>
                         @endif
                     @endauth
                 </div>

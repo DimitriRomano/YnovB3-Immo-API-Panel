@@ -21,8 +21,9 @@ class EnsureUserHasAdmin
             if($user->role->name === 'admin') {
                 return $next($request);
             };
+            return redirect()->route('welcome');
         }else{
-            return redirect()->route('home');
+            return redirect()->route('welcome');
         }
 
     }

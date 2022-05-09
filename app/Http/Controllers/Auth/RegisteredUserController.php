@@ -33,22 +33,38 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'required|string|min:10|max:16|unique:users',
+            'password' => 'required|string|min:6',
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+
+
+
+        $image = $request->file('image');
+        if($image){
+            $imageName = time() . '.'. $image->getClientOriginalExtension();
+            $image->move(public_path('img/user'), $imageName);
+            $imagePath = '/img/user/' . $imageName;
+        }else{
+            $imagePath = '/img/user.jpg';
+        }
+
+        $user = new User();
+        $user->name = $validatedData['name'];
+        $user->email = $validatedData['email'];
+        $user->phone= $validatedData['phone'];
+        $user->password = Hash::make($validatedData['password']);
+        $user->image = $imagePath;
+        $user->role_id = 2;
+        $user->save();
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('welcome');
     }
 }

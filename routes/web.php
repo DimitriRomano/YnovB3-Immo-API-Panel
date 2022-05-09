@@ -19,11 +19,11 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
-Route::get('/home/admin', [DashboardController::class,'getDashboard'])->name('home');
 
 Route::middleware('adminWeb')->group(function(){
+    Route::get('/home/admin', [DashboardController::class,'getDashboard'])->name('home');
 
     Route::get('/admin/properties', [DashboardController::class, 'getProperties'])->name('admin.properties');
 //    Route::get('/admin/properties/{id}', [DashboardController::class, 'getProperty'])->name('admin.properties.show');

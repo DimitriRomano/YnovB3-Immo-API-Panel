@@ -25,8 +25,8 @@ class PropertyController extends Controller
         $imagesSecondaries = $request->images;
         if($main_image){
             $imageName = time().'.'.$main_image->getClientOriginalExtension();
-            $main_image->move(public_path('img'), $imageName);
-            $imagePath = '/img/'.$imageName;
+            $main_image->move(public_path('img/properties'), $imageName);
+            $imagePath = '/img/properties'.$imageName;
             $property->main_image = $imagePath;
         }
         $property->title = $request->title;
@@ -42,7 +42,7 @@ class PropertyController extends Controller
 
         if($imagesSecondaries) {
             foreach ($imagesSecondaries as $imagesSecondary) {
-                $imageName = time() . '.' . $imagesSecondary->getClientOriginalExtension();
+                $imageName = time() . random_int(1,999) . '.' . $imagesSecondary->getClientOriginalExtension();
                 $imagesSecondary->move(public_path('img/properties'), $imageName);
                 $imagePath ='/img/properties/' . $imageName;
 
@@ -77,15 +77,15 @@ class PropertyController extends Controller
         $property = Property::findOrFail($id);
         if($main_image){
            $imageName = time().'.'.$main_image->getClientOriginalExtension();
-           $main_image->move(public_path('img\properties'), $imageName);
-            $imagePath = '/img/'.$imageName;
+           $main_image->move(public_path('img/properties'), $imageName);
+            $imagePath = '/img/properties/'.$imageName;
            $property->main_image = $imagePath;
         }
 
         $imagesSecondaries = $request->images;
         if($imagesSecondaries) {
             foreach ($imagesSecondaries as $imagesSecondary) {
-                $imageName = time() . '.' . $imagesSecondary->getClientOriginalExtension();
+                $imageName = time() . random_int(1,999).'.' . $imagesSecondary->getClientOriginalExtension();
                 $imagesSecondary->move(public_path('img/properties'), $imageName);
                 $imagePath = '/img/properties/' . $imageName;
 
