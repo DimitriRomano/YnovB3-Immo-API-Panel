@@ -1,28 +1,15 @@
-## ADMIN AGENCE : 
+## L'objectif
 
-- Accepter / Recevoir une offre
-- Créer une annonce
-- Editer une annonce
-- Supprimer une annonce
-- Voir toutes les annonces
+Nous proposons une solution pour une **agence immobilière** qui souhaiterai afficher les propriétés en ventes à ses clients à travers une **application**.
+
+Afin de gérer les annonces, les utilisateurs et les demandes de visites, l'administrateur aura également accès à une interface web constitué d'un panel d'administration.
 
 
-## CLIENT (Utilisateurs) : 
+<div style={{ textAlign: 'center' }}>
+<img src="https://i.imgur.com/YnkxP3r.png" height="100" width="100"/>
+</div>
 
-- Voir toutes annonces
-- Voir une annonce
-- Rechercher par filtres
-- Voir son profil et ses notification
-- Ajouter une annonce en favoris
-- Voir ses annonces favorites
-- Modifier ses informations
-
-- Etre notifié des nouvelles annonces
-- Postuler à une annonce
+_La couleur et le logo de notre projet ont été conçu par nous-même._
 
 
-
-## VISITEURS :
-
-- Voir les annonces
-- Se connecter / Créer un compte
+Retrouvez-notre documentation sur [ICI](http://francoisbonnin.me/Doc-Ymmobilier/)
